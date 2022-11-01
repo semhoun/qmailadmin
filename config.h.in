@@ -1,4 +1,4 @@
-/* config.h.in.  Generated from configure.in by autoheader.  */
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* "" */
 #undef AUTORESPOND_PATH
@@ -11,6 +11,9 @@
 
 /* Define to 1 if the `closedir' function returns void instead of `int'. */
 #undef CLOSEDIR_VOID
+
+/* "" */
+#undef CRACKLIB
 
 /* "" */
 #undef DOMAIN_AUTOFILL
@@ -33,6 +36,9 @@
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `crack' library (-lcrack). */
+#undef HAVE_LIBCRACK
 
 /* Define to 1 if you have the `crypt' library (-lcrypt). */
 #undef HAVE_LIBCRYPT
@@ -129,7 +135,6 @@
 /* "" */
 #undef NO_CACHE
 
-#if 0
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
 
@@ -147,7 +152,6 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
-#endif
 
 /* "" */
 #undef QA_PACKAGE
