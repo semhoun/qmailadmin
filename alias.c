@@ -305,11 +305,11 @@ void show_dotqmail_lines(char *user, char *dom, time_t mytime)
      */
     
     printf ("%s", HTML_ALIAS_ROW_START);
-    qmail_button (this_alias, "deldotqmail", user, dom, mytime, "trash.png");
+    qmail_button (this_alias, "deldotqmail", user, dom, mytime, "delete_forever");
     if (*curalias->alias_command == '#')
       printf ("%s", HTML_EMPTY_TD);   /* don't allow modify on blackhole */
     else
-      qmail_button (this_alias, "moddotqmail", user, dom, mytime, "modify.png");
+      qmail_button (this_alias, "moddotqmail", user, dom, mytime, "create");
     printh (HTML_ALIAS_NAME, this_alias);
     printf (HTML_ALIAS_DEST_START);
     
@@ -715,7 +715,7 @@ char* dotqmail_alias_command(char* line)
 
     *s = '\0';
     if ((s = strrchr(user, '/')) == NULL) return NULL;
-    if (b != NULL) { snprinth (user, sizeof(user), "%H <I>(%H)</I>", s+1, b); }
+    if (b != NULL) { snprinth (user, sizeof(user), "%H <i>(%H)</i>", s+1, b); }
     else { snprinth (user, sizeof(user), "%H", s+1); }
 
     return (user);
@@ -739,7 +739,7 @@ char* dotqmail_alias_command(char* line)
     /* back up to pipe or first slash to remove path */
     while (line[len] != '/' && line[len] != '|') len--;
     len++;   /* len is now first char of program name */
-    snprinth (command, sizeof(command), "<I>%H</I>", &line[len]);
+    snprinth (command, sizeof(command), "<i>%H</i>", &line[len]);
     return(command);
 
   } else {
