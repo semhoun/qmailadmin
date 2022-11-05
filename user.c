@@ -737,11 +737,11 @@ int makevacation (FILE *d, char *dir)
   snprintf (fn, sizeof(fn), "%s/vacation", dir);
   mkdir (fn, 0750);
 
-  fprintf (d, "| %s/autorespond 86400 3 %s/vacation/message %s/vacation\n",
-    AUTORESPOND_PATH, dir, dir );
+  fprintf (d, "| %s/qmail-autoresponder %s/vacation\n",
+    AUTORESPOND_PATH, dir );
       
   /* set up the message file */
-  snprintf(fn, sizeof(fn), "%s/vacation/message", dir);
+  snprintf(fn, sizeof(fn), "%s/vacation/message.txt", dir);
   GetValue(TmpCGI, Message, "vmessage=", sizeof(Message));
 
   if ( (f = fopen(fn, "w")) == NULL ) {
@@ -926,7 +926,7 @@ ActionUser, Domain ); */
     while (dotqmailline) {
       if ( (*dotqmailline == '|') &&
           (strstr (dotqmailline, "/true delete") == NULL) &&
-          (strstr (dotqmailline, "/autorespond ") == NULL) &&
+          (strstr (dotqmailline, "/qmail-autoresponder ") == NULL) &&
           (strstr (dotqmailline, SPAM_COMMAND) == NULL) ) {
         fprintf (fs, "%s\n", dotqmailline);
         emptydotqmail = 0;
@@ -1076,9 +1076,9 @@ void parse_users_dotqmail (char newchar)
             if (strstr (linebuf, "/true delete") != NULL)
               dotqmail_flags |= DOTQMAIL_BLACKHOLE;
               
-            else if (strstr (linebuf, "/autorespond ") != NULL) {
+            else if (strstr (linebuf, "/qmail-autoresponder ") != NULL) {
               dotqmail_flags |= DOTQMAIL_VACATION;
-              snprintf (fn, sizeof(fn), "%s/vacation/message", vpw->pw_dir);
+              snprintf (fn, sizeof(fn), "%s/vacation/message.txt", vpw->pw_dir);
               fs2 = fopen (fn, "r");
             }
             

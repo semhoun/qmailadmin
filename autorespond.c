@@ -169,7 +169,7 @@ void addautorespondnow()
   /*
     * Make the autoresponder message file
    */
-  sprintf(TmpBuf, "%s/message", TmpBuf2);
+  sprintf(TmpBuf, "%s/message.txt", TmpBuf2);
   if ( (fs = fopen(TmpBuf, "w")) == NULL ) ack("150", TmpBuf);
   fprintf(fs, "From: %s@%s\n", ActionUser,Domain);
   fprintf(fs, "Subject: %s\n", Alias);
@@ -192,8 +192,8 @@ void addautorespondnow()
    * Make the autoresponder .qmail file
    */
   valias_delete (ActionUser, Domain);
-  sprintf(TmpBuf, "|%s/autorespond 10000 5 %s/%s/message %s/%s",
-    AUTORESPOND_PATH, RealDir, TmpBuf2, RealDir, TmpBuf2);
+  sprintf(TmpBuf, "|%s/qmail-autoresponder %s/%s",
+    AUTORESPOND_PATH, RealDir, TmpBuf2);
   valias_insert (ActionUser, Domain, TmpBuf);
   if ( strlen(Newu) > 0 ) {
     sprintf(TmpBuf, "&%s", Newu);
@@ -308,8 +308,8 @@ void modautorespondnow()
    * Make the autoresponder .qmail file
    */
   valias_delete (ActionUser, Domain);
-  sprintf(TmpBuf, "|%s/autorespond 10000 5 %s/%s/message %s/%s",
-    AUTORESPOND_PATH, RealDir, TmpBuf2, RealDir, TmpBuf2);
+  sprintf(TmpBuf, "|%s/qmail-autoresponder %s/%s",
+    AUTORESPOND_PATH, RealDir, TmpBuf2);
   valias_insert (ActionUser, Domain, TmpBuf);
   if ( strlen(Newu) > 0 ) {
     sprintf(TmpBuf, "&%s", Newu);
@@ -319,7 +319,7 @@ void modautorespondnow()
   /*
    * Make the autoresponder message file
    */
-  sprintf(TmpBuf, "%s/message", TmpBuf2);
+  sprintf(TmpBuf, "%s/message.txt", TmpBuf2);
   if ( (fs = fopen(TmpBuf, "w")) == NULL ) ack("150", TmpBuf);
   fprintf(fs, "From: %s@%s\n", ActionUser,Domain);
   fprintf(fs, "Subject: %s\n", Alias);
